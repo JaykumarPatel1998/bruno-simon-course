@@ -3,6 +3,27 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
+ * Textures
+ */
+const loadingManager = new THREE.LoadingManager()
+const textureLoader = new THREE.TextureLoader(loadingManager)
+const texture = textureLoader.load('/textures/minecraft.png')
+
+// texture.repeat.x = 8
+// texture.repeat.y = 8
+// texture.wrapS = THREE.MirroredRepeatWrapping
+// texture.wrapT = THREE.MirroredRepeatWrapping
+
+// texture.offset.x =0.5
+// texture.offset.y =0.5
+
+// texture.rotation = Math.PI / 4
+// texture.center.x = 0.5
+// texture.center.y = 0.5
+
+texture.magFilter = THREE.NearestFilter
+
+/**
  * Base
  */
 // Canvas
@@ -12,8 +33,8 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Object
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff00ee })
+const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
+const material = new THREE.MeshBasicMaterial({ map: texture })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
